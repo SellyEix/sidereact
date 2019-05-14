@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
 import FlowerSpinner from '@bit/bondz.react-epic-spinners.flower-spinner';
-import { WiredButton } from "wired-elements";
 import {Link} from 'react-router-dom';
 
-import showdown from 'showdown' //第三方的一个开源markdown库
-import Prism from 'prismjs'//第三方的一个开源的代码染色库，非常好用
-import './preStyle.css' //就是预先放置的一个cssconst style = require("raw-loader!./style1.txt") //注意使用raw-loader解析字符串
-// import style from './style1.txt';
-// import style2 from './style2.txt';
-// import resume from './resume.txt';
-// eslint-disable-next-line import/no-webpack-loader-syntax
-const style = require("raw-loader!./style1.txt") //注意使用raw-loader解析字符串
-// eslint-disable-next-line import/no-webpack-loader-syntax
-const style2 = require("raw-loader!./style2.txt")
-// eslint-disable-next-line import/no-webpack-loader-syntax
-const resume = require("raw-loader!./resume.txt")
+import showdown from 'showdown' 
+import Prism from 'prismjs'
+import './preStyle.css' 
 let interval
 
+const style=
+"*{\n  -webkit-transition: all .8s;\n  transition: all .8s;\n}\nhtml {\n  background: #5F5F5F; \n}\n.token.comment{ \n    color: white \n}\n\n\n/* Welcome to the website of fate.\n What leads you here?\n*/\n\n.myth{\n  color: #608CFF; \n  top:0;\n  overflow: auto;\n  background: #474747;\n  border: 1px solid #ccc;\n  max-height: 90%;\n  width: 35%;\n  font-size: 14px;\n  font-family: monospace;\n  padding: 10px 10px 20px;\n  box-shadow: -4px 4px 2px 0 rgba(0,0,0,0.3);\n  white-space: pre-wrap;\n  outline: 0;\n}\n/* \n* Don't panic, \n* I'm just trying to communicate with you.\n* I need to set it up a little bit. \n*/\n\n\n.token.comment{ color: white; font-size: 18px; font-style: italic; }\n.token.selector{ color: #E69F0F; }\n.token.property{ color: #64D5EA; }\n.token.punctuation{ color: #64D5EA; }\n.token.function{ color: #BE84F2; }\n\n/*\n* I am a witch that cursed to live in the computer.*/\n/* I had sins.*/\n/* But now I am paying my debt.*/\n\n\n.myth {\n  -webkit-transform: translateX(170%);\n  transform:translateX(170%); position:fixed;\n}\n\n/*\n* Young people, */ \n/* Do you want to know your fate?*/\n/* Let's contemplate a poem first. \n*/\n.poem{\n  position:fixed;\n  top:50;\n  padding: .5em;  margin: .5em;\n  background: white; color: #222;\n  width: 40vw; height:500px; \n  border: 1px solid;\n  overflow: auto;\n  color: #8C8C8C; \n  background: #A7A7A7;\n}\n"
+const poem =
+"The rose is a rose, \n\nAnd was always a rose. \n\nBut the theory now goes \n\nThat the apple’s a rose, \n\nAnd the pear is, and so’s \n\nThe plum, I suppose. \n\nThe dear only knows \n\nWhat will next prove a rose. \n\nYou, of course, are a rose – \n\nBut were always a rose. \n\n ...";
+const style2=
+"\n\n/* Ah... Love... */\n\n/* Do you want to know how your love will go? */\n\n/* Give me the names... */\n\n/* I can show you... */\n\n/* Scroll down and then you can see the entrance... */\n\n"
 
 
 const wirteChars = (that, nodeName, char) => new Promise((resolve) => {
     setTimeout(() => {
-        if (nodeName == 'workArea') {
+        if (nodeName == 'myth') {
             const origin = that.state.DOMStyleText + char
             const html = Prism.highlight(origin, Prism.languages.css)
             that.setState({
@@ -30,33 +26,34 @@ const wirteChars = (that, nodeName, char) => new Promise((resolve) => {
             })
             
             that.contentNode.scrollTop = that.contentNode.scrollHeight
-        } else if (nodeName == 'resume') {
-            const originResume = that.state.resumeText + char
+        } else if (nodeName == 'poem') {
+            const originpoem = that.state.poemText + char
             const converter = new showdown.Converter()
-            const markdownResume = converter.makeHtml(originResume)
+            const markdownpoem = converter.makeHtml(originpoem)
             that.setState({
-                resumeText: originResume,
-                DOMResumeText: markdownResume
+                poemText: originpoem,
+                DOMpoemText: markdownpoem
             })
-            that.resumeNode.scrollTop = that.resumeNode.scrollHeight
+            that.poemNode.scrollTop = that.poemNode.scrollHeight
         }
-        /* 这里是控制，当遇到中文符号的？，！的时候就延长时间  */
-        if (char == "？" || char == "，" || char == '！') {
-            interval = 800
-        } else {
-            interval = 22
+        if (char == "?" || char == "," || char == '!') {
+            interval = 500
+        } else if (nodeName == 'poem' || char == '.'){
+            interval = 30
         }
-        resolve()//一定要写的promise函数，不然你无法获得promise结果
+        else {
+            interval = 2
+        }
+        resolve()
     }, interval)
 })
 
 const writeTo = async (that, nodeName, index, text) => {
-    /* 一个字一个字的读咯,这样会获得丝滑柔顺的打字效果... */
     let speed = 1
     let char = text.slice(index, index + speed)
     index += speed
     if (index > text.length) {
-        return//如果字打完了，就返回了
+        return
     }
     await wirteChars(that, nodeName, char)
     await writeTo(that, nodeName, index, text)
@@ -70,24 +67,39 @@ class Home extends Component {
         this.state = {
             styleText: ``,
             DOMStyleText: ``,
-            resumeText: ``,
-            DOMResumeText: ``
+            poemText: ``,
+            DOMpoemText: ``
         }
 
     }
     componentDidMount() {
-        (async (that) => {//这里的这个函数中文名叫做「定义即运行函数」，其实就是定义了马上运行。
-            await writeTo(that, 'workArea', 0, style)
-            await writeTo(that, 'resume', 0, resume)
-            await writeTo(that, 'workArea', 0, style2)
+        (async (that) => {
+            await writeTo(that, 'myth', 0, style)
+            await writeTo(that, 'poem', 0, poem)
+            await writeTo(that, 'myth', 0, style2)
         })(this)
     }
 
     render() {
         return (
             <div>
+                <div style={{height: '600px'}}>
+                <div
+                    className='myth'
+                    ref={(node) => { this.contentNode = node }}
+                >
+                    <div dangerouslySetInnerHTML={{ __html: this.state.styleText }}></div>
+                    <style dangerouslySetInnerHTML={{ __html: this.state.DOMStyleText }}></style>
+                </div>
+                <div
+                    className='poem'
+                    dangerouslySetInnerHTML={{ __html: this.state.DOMpoemText }}
+                    ref={(node) => { this.poemNode = node }}
+                >
+                </div>
+                
+                </div>
                 <div>
-                    <h1>HI</h1>
                     <FlowerSpinner style={{ margin: 'auto' }}
                         color='#ffffff'
                         size='200'
@@ -95,32 +107,13 @@ class Home extends Component {
                 </div>
                 <div style={{paddingLeft:'46%'}}>
                 <Link to="/Love">
-                    <wired-button style={{margin: 'auto'}} >
+                    <wired-button style={{margin: 'auto', color:'white'}} >
                         LOVE TEST
 					</wired-button>
                     <br />
                     <br />
                 </Link>
                 </div>
-{/* ADD */}
-                <div
-                    className='workArea'
-                    ref={(node) => { this.contentNode = node }}
-                >
-                    <div dangerouslySetInnerHTML={{ __html: this.state.styleText }}></div>
-                    <style dangerouslySetInnerHTML={{ __html: this.state.DOMStyleText }}></style>
-                </div>
-                <div
-                    className='resume'
-                    dangerouslySetInnerHTML={{ __html: this.state.DOMResumeText }}
-                    ref={(node) => { this.resumeNode = node }}
-                >
-                </div>
-                <div id="bot" style={{ padding: '10px', textAlign: 'center', marginTop: '100px', fontSize: '10px', color: 'rgba(150, 150, 150, 0.8)' }}>
-                    Powered by
-                    <a href="https://www.zhihu.com/people/fang-zheng-3-34/activities"> 知乎，方正</a>
-                </div>
-
             </div>
         );
     }

@@ -3,21 +3,22 @@
 }
 
 body {
-  background-image: url("https://images.unsplash.com/photo-1503455637927-730bce8583c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
-  background-size: 100%;
+  /* background-image: url("https://images.unsplash.com/photo-1503455637927-730bce8583c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80");
+  background-size: 100%; */
+  background-color: rgba(94, 36, 53, 0.897);
 }
 
 
-h1 {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+h1,p {
+  font-family: fantasy;
   text-align: center;
   color: white;
+  font: bold;
 }
-p {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  text-align: center;
-  color: white;
+p{
+  font-size: 26px;
 }
+
 
 .form {
   text-align: center;
@@ -45,32 +46,59 @@ p {
   text-align: center;
 }
 
-
-
-
-#Nav_menu {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 100%;
-  list-style-type: none;
-  margin: 0;
-  background-color: black;
-  padding: 0;
+input {
+  width: 180px;
+  padding: 7px 12px 0px 12px;
+  margin: 2px ;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  font-size: 20px;
+  font-family: fantasy;
+  text-align: center;
+  color:  rgba(204, 83, 130);
+  box-shadow: 10px 10px 5px rgba(204, 83, 130, 0.808);
 }
-
-.NavLink:link {
+textarea {
+  width: 300px;
+  height: 150px;
+  padding: 5px 5px;
+  /* margin: 10px; */
+  box-sizing: border-box;
+  
+  background-color: #90cbf381;
+  resize: none;
   color: #fff;
-  font-size: 1.6rem;
-  line-height: 1.6rem;
-  text-decoration: none;
+  
 }
-.Nav_link:visited {
+
+
+
+button{
+  
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -khtml-border-radius: 5px;
+  background:  rgba(204, 83, 130);
   color: #fff;
+  border: solid 1px #fff;
+  /* text-decoration: none8*/
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 15px;
+  /* padding: 10px 10px; */
+  width: 80px;
+  height: 30px;
+  margin: 10px;
+  outline: none;
+  font-family: 'Gill Sans';
+  -webkit-appearance: none;
+
+  box-shadow: 10px 10px 5px rgba(204, 83, 130, 0.808);
+  
 }
-.Nav_link:hover {
-  color: yellow;
-}
-.Nav_link:active {
-  color: teal;
+wired-card{
+  box-shadow: 10px 10px 5px rgba(204, 83, 130, 0.808);
+  margin: 40px;
 }

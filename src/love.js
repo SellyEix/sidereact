@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './love.css';
-import { WiredButton, WiredInput, WiredIconButton, WiredCard } from "wired-elements"
+import './App.css';
+
+import { WiredButton, WiredInput, WiredIconButton, WiredCard } from "wired-elements";
 
 class Love extends Component {
     constructor(props) {
@@ -66,7 +67,7 @@ class Love extends Component {
 
         return (
             <div className="App">
-                <wired-card style={{ text: 'wrap', width: '600px', height: '600px' }} elevation="3">
+                <wired-card style={{ text: 'wrap', width: '600px', height: '700px' }} elevation="3">
                     <h1>Let's see if you and your crush can have a future..</h1>
                     <br />
                     <br />
