@@ -99,13 +99,13 @@ class Home extends Component {
                 </div>
                 
                 </div>
-                <div>
+                {/* <div>
                     <FlowerSpinner style={{ margin: 'auto' }}
                         color='#ffffff'
                         size='200'
                     />
-                </div>
-                <div style={{paddingLeft:'46%'}}>
+                </div> */}
+                <div style={{paddingLeft:'46%', paddingTop:'200px'}}>
                 <Link to="/Love">
                     <wired-button style={{margin: 'auto', color:'white'}} >
                         LOVE TEST
