@@ -1,0 +1,59 @@
+input {
+    width: 180px;
+    padding: 7px 12px 0px 12px;
+    margin: 2px ;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    font-size: 20px;
+    font-family: fantasy;
+    text-align: center;
+    color:  rgba(204, 83, 130);
+    box-shadow: 10px 10px 5px rgba(204, 83, 130, 0.808);
+  }
+  textarea {
+    width: 300px;
+    height: 150px;
+    padding: 5px 5px;
+    /* margin: 10px; */
+    box-sizing: border-box;
+    
+    background-color: #90cbf381;
+    resize: none;
+    color: #fff;
+    
+  }
+
+h1, p {
+    font-family: 'Gill Sans';
+    font: bold;
+}
+
+button{
+    
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -khtml-border-radius: 5px;
+    background:  rgba(204, 83, 130);
+    color: #fff;
+    border: solid 1px #fff;
+    /* text-decoration: none8*/
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 15px;
+    /* padding: 10px 10px; */
+    width: 80px;
+    height: 30px;
+    margin: 10px;
+    outline: none;
+    font-family: 'Gill Sans';
+    -webkit-appearance: none;
+
+    box-shadow: 10px 10px 5px rgba(204, 83, 130, 0.808);
+    
+  }
+  wired-card{
+    box-shadow: 10px 10px 5px rgba(204, 83, 130, 0.808);
+    margin: 40px;
+  }
